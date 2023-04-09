@@ -1,11 +1,21 @@
 import React, { useState } from 'react'
 import './App.css';
 import axios from 'axios';
+import { useEffect } from 'react';
 
 function Form() {
-  const [carNumber, setCarNumber] = useState();
+  const [carNumber, setCarNumber] = useState({});
+
+  useEffect(() => {
+    getCarNumber();
+    const interval = setInterval(() => {
+      getCarNumber();
+    }, 10000)
+    return () => clearInterval(interval)
+  }, [])
+
   function getCarNumber() {
-    axios.get(`http://127.0.0.1:5000/store/car-number-for-check/`, {
+    axios.get(`http://127.0.0.1:5000/store/car-number-for-check`, {
       headers: {
         'Content-Type': 'application/json'
       }
@@ -14,9 +24,6 @@ function Form() {
         setCarNumber(resp.data)
       })
   }
-
-  getCarNumber();
-  setInterval(getCarNumber, 60000);
 
   return (
     <form>
