@@ -1,0 +1,10 @@
+.App {
+  margin-top: 20%;
+  text-align: center;
+}
+
+.car-number {
+  font-size: xx-large;
+  color: red;
+  font-style: italic;
+}
